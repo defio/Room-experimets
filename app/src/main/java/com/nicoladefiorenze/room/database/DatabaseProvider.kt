@@ -16,7 +16,7 @@ object DatabaseProvider {
 
     fun getDatabase(context: Context): Database {
         if (db == null) {
-            return Room.databaseBuilder(context, Database::class.java, "experimental-database").build()
+            db = Room.databaseBuilder(context, Database::class.java, "experimental-database").build()
         }
         return db!!
     }
