@@ -1,9 +1,10 @@
-package com.nicoladefiorenze.room.database
+package com.nicoladefiorenze.room.database.dao
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
+import com.nicoladefiorenze.room.database.entity.User
 
 
 /**

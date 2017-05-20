@@ -1,4 +1,4 @@
-package com.nicoladefiorenze.room.database
+package com.nicoladefiorenze.room.database.entity
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
