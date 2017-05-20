@@ -6,7 +6,6 @@ import android.content.Context
 
 /**
  * Project: Room<br/>
- * <br/>
  * created on: 2017-05-20
  *
  * @author Nicola De Fiorenze

@@ -8,7 +8,6 @@ import android.arch.persistence.room.Query
 
 /**
  * Project: Room<br/>
- * <br/>
  * created on: 2017-05-20
  *
  * @author Nicola De Fiorenze

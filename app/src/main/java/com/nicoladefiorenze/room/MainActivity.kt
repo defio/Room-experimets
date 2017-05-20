@@ -6,13 +6,17 @@ import android.support.v7.app.AppCompatActivity
 import com.nicoladefiorenze.room.database.DatabaseProvider
 import com.nicoladefiorenze.room.database.User
 
+/**
+ * Project: Room<br/>
+ * created on: 2017-05-20
+ *
+ * @author Nicola De Fiorenze
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
 
         object : AsyncTask<Void, Void, Void>() {
 
