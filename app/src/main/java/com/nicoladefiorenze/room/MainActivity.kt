@@ -8,6 +8,8 @@ import com.nicoladefiorenze.room.database.DatabaseProvider
 import com.nicoladefiorenze.room.database.entity.Email
 import com.nicoladefiorenze.room.database.entity.User
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+
 
 /**
  * Project: Room<br/>
@@ -16,6 +18,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  * @author Nicola De Fiorenze
  */
 class MainActivity : AppCompatActivity() {
+
+    private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 val all = userDao.getAll()
                 println("Users: " + all)
 
-                var email = Email()
+                val email = Email()
                 email.email = "${all.last().name}@gmail.com"
                 email.isPrimary = true
                 email.userId = all.last().id
@@ -43,18 +47,24 @@ class MainActivity : AppCompatActivity() {
                 val emailDao = database.emailDao()
                 emailDao.insertAll(email)
 
-                emailDao.getEmailsForUser(all.last().id).observeOn(AndroidSchedulers.mainThread())
+                disposables.add(emailDao.getEmailsForUser(all.last().id).observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 { list ->
                                     println(Thread.currentThread().name)
-                                    println("email for ${all.last().id} " + list) },
+                                    println("email for ${all.last().id} " + list)
+                                },
                                 { throwable -> println(throwable.message) })
+                )
 
 
                 return null
 
             }
         }.execute()
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disposables.clear()
     }
 }
