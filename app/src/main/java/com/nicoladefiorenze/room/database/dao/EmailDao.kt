@@ -5,6 +5,8 @@ import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import com.nicoladefiorenze.room.database.entity.Email
+import io.reactivex.Flowable
+import io.reactivex.Single
 
 /**
  * Project: Room<br/>
@@ -16,12 +18,12 @@ import com.nicoladefiorenze.room.database.entity.Email
 interface EmailDao{
 
     @Query("SELECT * FROM email")
-    fun getAll(): List<Email>
+    fun getAll(): Flowable<List<Email>>
 
     @Query("SELECT * FROM email "
             + "INNER JOIN user ON user.id = email.user_id "
             + "WHERE user.id = :arg0")
-    fun getEmailsForUser(userId: Int): List<Email>
+    fun getEmailsForUser(userId: Int): Flowable<List<Email>>
 
     @Insert
     fun insertAll(vararg emails: Email)
