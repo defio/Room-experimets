@@ -29,12 +29,13 @@ class MainActivity : AppCompatActivity() {
         val database = DatabaseProvider.getDatabase(applicationContext)
 
 
-        UserDataSource(database).getAllUsers().subscribeOn(Schedulers.io()).observeOn(
+        disposables.add(UserDataSource(database).getAllUsers().subscribeOn(Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread())
                 .subscribe(
                         { user -> println(user) },
                         { error -> println(error.message) }
                 )
+        )
 
 
     }
