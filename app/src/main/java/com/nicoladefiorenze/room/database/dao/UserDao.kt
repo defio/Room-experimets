@@ -5,6 +5,7 @@ import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import com.nicoladefiorenze.room.database.entity.User
+import io.reactivex.Flowable
 
 
 /**
@@ -17,6 +18,9 @@ import com.nicoladefiorenze.room.database.entity.User
 interface UserDao {
     @Query("SELECT * FROM user")
     fun getAll(): List<User>
+
+    @Query("SELECT * FROM user")
+    fun getAllWithObservables(): Flowable<List<User>>
 
     @Insert
     fun insertAll(vararg users: User)

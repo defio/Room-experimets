@@ -18,12 +18,20 @@ import io.reactivex.Single
 interface EmailDao{
 
     @Query("SELECT * FROM email")
-    fun getAll(): Flowable<List<Email>>
+    fun getAllWithObservables(): Flowable<Email>
 
     @Query("SELECT * FROM email "
             + "INNER JOIN user ON user.id = email.user_id "
             + "WHERE user.id = :arg0")
-    fun getEmailsForUser(userId: Int): Flowable<List<Email>>
+    fun getEmailsForUserWithObservables(userId: Int): Flowable<Email>
+
+    @Query("SELECT * FROM email")
+    fun getAll(): List<Email>
+
+    @Query("SELECT * FROM email "
+            + "INNER JOIN user ON user.id = email.user_id "
+            + "WHERE user.id = :arg0")
+    fun getEmailsForUser(userId: Int): List<Email>
 
     @Insert
     fun insertAll(vararg emails: Email)
